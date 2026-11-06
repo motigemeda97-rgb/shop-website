@@ -12,28 +12,26 @@
   --border: #e3e7ef;       /* light borders */
 }
 
-/* Make width calculations simpler: padding is included in an element's width */
 * { box-sizing: border-box; }
 
 body {
-  margin: 0;                                   /* remove default page margin */
-  font-family: system-ui, Arial, sans-serif;   /* use the device's nice font */
+  margin: 0;                                  
+  font-family: system-ui, Arial, sans-serif;   
   background: var(--bg);
   color: var(--text);
 }
 
-/* ---------- Header ---------- */
 .site-header {
-  display: flex;               /* put children in a row */
-  flex-wrap: wrap;             /* wrap to a new line on small screens */
-  align-items: center;         /* vertically centre */
-  gap: 12px;                   /* space between children */
+  display: flex;             
+  flex-wrap: wrap;            
+  align-items: center;        
+  gap: 12px;                
   padding: 14px 24px;
   background: var(--card);
   border-bottom: 1px solid var(--border);
-  position: sticky;            /* stays at the top while scrolling */
+  position: sticky;          
   top: 0;
-  z-index: 10;                 /* sits above the product cards */
+  z-index: 10;               
 }
 
 .logo { margin: 0; font-size: 1.4rem; color: var(--brand); }
@@ -46,7 +44,7 @@ body {
   font-size: 1rem;
 }
 
-#search { flex: 1; min-width: 160px; }   /* search box takes the spare space */
+#search { flex: 1; min-width: 160px; }  
 
 .cart-btn {
   padding: 10px 16px;
@@ -59,13 +57,13 @@ body {
 }
 .cart-btn:hover { background: var(--brand-dark); }
 
-/* ---------- Product grid ---------- */
+
 main { max-width: 1100px; margin: 0 auto; padding: 24px; }
 .section-title { margin-top: 0; }
 
 .product-grid {
-  display: grid;   /* a grid layout: rows and columns */
-  /* as many columns as fit, each at least 200px wide, sharing space equally */
+  display: grid;  
+ 
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 18px;
 }
@@ -76,10 +74,10 @@ main { max-width: 1100px; margin: 0 auto; padding: 24px; }
   border-radius: 12px;
   padding: 18px;
   text-align: center;
-  transition: transform 0.15s, box-shadow 0.15s;  /* smooth hover animation */
+  transition: transform 0.15s, box-shadow 0.15s;  
 }
 .product-card:hover {
-  transform: translateY(-4px);                    /* lift up slightly */
+  transform: translateY(-4px);                  
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
@@ -90,7 +88,7 @@ main { max-width: 1100px; margin: 0 auto; padding: 24px; }
 
 .no-results { text-align: center; color: var(--muted); }
 
-/* ---------- Buttons ---------- */
+
 .primary-btn {
   background: var(--brand);
   color: white;
@@ -118,9 +116,9 @@ main { max-width: 1100px; margin: 0 auto; padding: 24px; }
   cursor: pointer;
 }
 
-/* ---------- Cart panel ---------- */
+
 .cart-panel {
-  position: fixed;                 /* stays in place on screen */
+  position: fixed;               
   top: 0;
   right: 0;
   width: 360px;
@@ -129,12 +127,12 @@ main { max-width: 1100px; margin: 0 auto; padding: 24px; }
   background: var(--card);
   box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
   display: flex;
-  flex-direction: column;          /* stack header, items, footer vertically */
-  transform: translateX(100%);     /* hidden: pushed off the right edge */
-  transition: transform 0.25s;     /* slide animation */
+  flex-direction: column;          
+  transform: translateX(100%);    
+  transition: transform 0.25s;     
   z-index: 30;
 }
-.cart-panel.open { transform: translateX(0); }  /* JS adds "open" to show it */
+.cart-panel.open { transform: translateX(0); }  
 
 .cart-header {
   display: flex;
@@ -145,7 +143,7 @@ main { max-width: 1100px; margin: 0 auto; padding: 24px; }
 }
 .cart-header h2 { margin: 0; }
 
-.cart-items { flex: 1; overflow-y: auto; padding: 12px 20px; }  /* scrolls if long */
+.cart-items { flex: 1; overflow-y: auto; padding: 12px 20px; } 
 .empty-cart { color: var(--muted); text-align: center; margin-top: 40px; }
 
 .cart-row {
@@ -173,19 +171,18 @@ main { max-width: 1100px; margin: 0 auto; padding: 24px; }
 .cart-total { font-size: 1.2rem; margin-top: 0; }
 .cart-footer .primary-btn { width: 100%; }
 
-/* ---------- Overlay & modal ---------- */
 .overlay {
   position: fixed;
-  inset: 0;                          /* shorthand for top/right/bottom/left = 0 */
+  inset: 0;                         
   background: rgba(0, 0, 0, 0.45);
-  z-index: 20;                       /* above page, below cart (30) */
+  z-index: 20;                       
 }
 
 .modal {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);  /* centre the box on screen */
+  transform: translate(-50%, -50%);  
   width: 420px;
   max-width: 92%;
   max-height: 90vh;
@@ -213,6 +210,5 @@ main { max-width: 1100px; margin: 0 auto; padding: 24px; }
 .order-summary { color: var(--muted); }
 .modal-buttons { display: flex; justify-content: flex-end; gap: 10px; }
 
-/* The "hidden" attribute normally hides things, but our display rules above
    can override it. This line makes sure hidden always wins. */
 [hidden] { display: none !important; }
