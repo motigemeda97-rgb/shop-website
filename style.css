@@ -1,0 +1,218 @@
+/* style.css - controls how the shop looks */
+
+/* :root holds "CSS variables" we can reuse everywhere, so a colour
+   change only needs to be made in one place */
+:root {
+  --brand: #2f6fed;        /* main blue */
+  --brand-dark: #1f55c4;   /* darker blue for hover */
+  --bg: #f5f7fb;           /* page background */
+  --card: #ffffff;         /* card background */
+  --text: #1c2333;         /* main text colour */
+  --muted: #6b7280;        /* grey text */
+  --border: #e3e7ef;       /* light borders */
+}
+
+/* Make width calculations simpler: padding is included in an element's width */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;                                   /* remove default page margin */
+  font-family: system-ui, Arial, sans-serif;   /* use the device's nice font */
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  display: flex;               /* put children in a row */
+  flex-wrap: wrap;             /* wrap to a new line on small screens */
+  align-items: center;         /* vertically centre */
+  gap: 12px;                   /* space between children */
+  padding: 14px 24px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;            /* stays at the top while scrolling */
+  top: 0;
+  z-index: 10;                 /* sits above the product cards */
+}
+
+.logo { margin: 0; font-size: 1.4rem; color: var(--brand); }
+
+.site-header input,
+.site-header select {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+#search { flex: 1; min-width: 160px; }   /* search box takes the spare space */
+
+.cart-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--brand);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.cart-btn:hover { background: var(--brand-dark); }
+
+/* ---------- Product grid ---------- */
+main { max-width: 1100px; margin: 0 auto; padding: 24px; }
+.section-title { margin-top: 0; }
+
+.product-grid {
+  display: grid;   /* a grid layout: rows and columns */
+  /* as many columns as fit, each at least 200px wide, sharing space equally */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 18px;
+}
+
+.product-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  text-align: center;
+  transition: transform 0.15s, box-shadow 0.15s;  /* smooth hover animation */
+}
+.product-card:hover {
+  transform: translateY(-4px);                    /* lift up slightly */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.product-emoji { font-size: 3.5rem; }
+.product-name { margin: 8px 0 2px; font-size: 1.05rem; }
+.product-category { color: var(--muted); font-size: 0.85rem; margin: 0; }
+.product-price { font-weight: bold; font-size: 1.15rem; margin: 10px 0; }
+
+.no-results { text-align: center; color: var(--muted); }
+
+/* ---------- Buttons ---------- */
+.primary-btn {
+  background: var(--brand);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.primary-btn:hover { background: var(--brand-dark); }
+
+.secondary-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+/* ---------- Cart panel ---------- */
+.cart-panel {
+  position: fixed;                 /* stays in place on screen */
+  top: 0;
+  right: 0;
+  width: 360px;
+  max-width: 100%;
+  height: 100%;
+  background: var(--card);
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;          /* stack header, items, footer vertically */
+  transform: translateX(100%);     /* hidden: pushed off the right edge */
+  transition: transform 0.25s;     /* slide animation */
+  z-index: 30;
+}
+.cart-panel.open { transform: translateX(0); }  /* JS adds "open" to show it */
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.cart-header h2 { margin: 0; }
+
+.cart-items { flex: 1; overflow-y: auto; padding: 12px 20px; }  /* scrolls if long */
+.empty-cart { color: var(--muted); text-align: center; margin-top: 40px; }
+
+.cart-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.cart-row .emoji { font-size: 1.8rem; }
+.cart-row .info { flex: 1; }
+.cart-row .info small { color: var(--muted); }
+
+.qty-controls { display: flex; align-items: center; gap: 6px; }
+.qty-controls button {
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cart-footer { padding: 16px 20px; border-top: 1px solid var(--border); }
+.cart-total { font-size: 1.2rem; margin-top: 0; }
+.cart-footer .primary-btn { width: 100%; }
+
+/* ---------- Overlay & modal ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;                          /* shorthand for top/right/bottom/left = 0 */
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 20;                       /* above page, below cart (30) */
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);  /* centre the box on screen */
+  width: 420px;
+  max-width: 92%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 24px;
+  z-index: 40;
+}
+.modal h2 { margin-top: 0; }
+
+.modal label { display: block; margin-bottom: 12px; font-weight: 600; font-size: 0.9rem; }
+.modal input,
+.modal textarea {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.order-summary { color: var(--muted); }
+.modal-buttons { display: flex; justify-content: flex-end; gap: 10px; }
+
+/* The "hidden" attribute normally hides things, but our display rules above
+   can override it. This line makes sure hidden always wins. */
+[hidden] { display: none !important; }
