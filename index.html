@@ -1,51 +1,33 @@
 <!DOCTYPE html>
-<!-- Tells the browser this file is modern HTML5 -->
 <html lang="en">
 <head>
-  <!-- Use a character set that supports emojis and all languages -->
   <meta charset="UTF-8" />
-  <!-- Makes the page scale correctly on phones -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- The text shown on the browser tab -->
   <title>QuickCart Shop</title>
-  <!-- Load our styles from style.css -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ============ HEADER: logo, search, cart button ============ -->
   <header class="site-header">
     <h1 class="logo">🛒 QuickCart</h1>
 
-    <!-- The search box. script.js reads what the user types here -->
     <input id="search" type="search" placeholder="Search products..." />
-
-    <!-- The category dropdown. script.js fills in its options -->
     <select id="category"></select>
-
-    <!-- Button that opens the cart. The span shows how many items are inside -->
     <button id="cart-button" class="cart-btn">
       Cart (<span id="cart-count">0</span>)
     </button>
   </header>
-
-  <!-- ============ MAIN: the product grid ============ -->
   <main>
     <h2 class="section-title">Our Products</h2>
-    <!-- script.js puts a card for each product inside this empty div -->
     <div id="product-grid" class="product-grid"></div>
-    <!-- Shown only when a search finds nothing -->
     <p id="no-results" class="no-results" hidden>No products match your search.</p>
   </main>
 
-  <!-- ============ CART PANEL: slides in from the right ============ -->
   <aside id="cart-panel" class="cart-panel">
     <div class="cart-header">
       <h2>Your Cart</h2>
       <button id="close-cart" class="icon-btn" aria-label="Close cart">✕</button>
     </div>
-
-    <!-- script.js fills this list with the items in the cart -->
     <div id="cart-items" class="cart-items"></div>
 
     <div class="cart-footer">
@@ -53,13 +35,8 @@
       <button id="checkout-btn" class="primary-btn">Checkout</button>
     </div>
   </aside>
-
-  <!-- A dark layer behind the cart/checkout. Clicking it closes them -->
   <div id="overlay" class="overlay" hidden></div>
-
-  <!-- ============ CHECKOUT MODAL (popup) ============ -->
   <div id="checkout-modal" class="modal" hidden>
-    <!-- The form the customer fills in -->
     <form id="checkout-form">
       <h2>Checkout</h2>
       <p id="order-summary" class="order-summary"></p>
@@ -81,16 +58,12 @@
         <button type="submit" class="primary-btn">Place Order</button>
       </div>
     </form>
-
-    <!-- Shown instead of the form after the order is placed -->
     <div id="success-message" hidden>
       <h2>🎉 Order placed!</h2>
       <p id="success-text"></p>
       <button id="close-success" class="primary-btn">Continue shopping</button>
     </div>
   </div>
-
-  <!-- Load products first, then the main script (order matters!) -->
   <script src="products.js"></script>
   <script src="script.js"></script>
 </body>
